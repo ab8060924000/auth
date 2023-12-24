@@ -1,6 +1,9 @@
 name: Log In Update
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       username:
@@ -9,6 +12,7 @@ on:
       device:
         description: 'Device'
         required: true
+
 
 jobs:
   update-login-log:
