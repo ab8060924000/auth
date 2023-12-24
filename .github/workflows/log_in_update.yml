@@ -1,0 +1,30 @@
+name: Log In Update
+
+on:
+  workflow_dispatch:
+    inputs:
+      username:
+        description: 'Username'
+        required: true
+      device:
+        description: 'Device'
+        required: true
+
+jobs:
+  update-login-log:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Log In Update
+        run: |
+          echo "${{ github.event.inputs.username }} logged in from ${{ github.event.inputs.device }}" >> login-log.txt
+
+      - name: Commit and Push Changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add login-log.txt
+          git commit -m "Log in update"
+          git push
